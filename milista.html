@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineCritic - Mi Lista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-black bg-opacity-90 fixed w-full z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-8">
+            <a href="index.html" class="text-red-600 font-bold text-3xl">CineCritic</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-gray-300">Inicio</a>
+                <a href="peliculas.html" class="hover:text-gray-300">Películas</a>
+                <a href="series.html" class="hover:text-gray-300">Series</a>
+                <a href="novedades.html" class="hover:text-gray-300">Novedades</a>
+                <a href="milista.html" class="hover:text-gray-300">Mi lista</a>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <input type="text" placeholder="Buscar..." class="bg-gray-800 px-4 py-1 rounded text-sm w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-red-600">
+                <i class="fas fa-search absolute right-3 top-2 text-gray-400"></i>
+            </div>
+            <a href="login.html" class="w-8 h-8 rounded bg-red-600 flex items-center justify-center hover:bg-red-700 transition">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 pt-24 pb-12">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold">Mi Lista</h1>
+            <div class="flex items-center space-x-4">
+                <button id="editBtn" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded">
+                    <i class="fas fa-edit mr-2"></i>Editar
+                </button>
+                <button id="createListBtn" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded">
+                    <i class="fas fa-plus mr-2"></i>Crear lista
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex space-x-8 border-b border-gray-700 mb-8">
+            <div class="tab active" data-tab="watchlist">
+                <span class="text-lg">Por ver</span>
+                <span class="ml-2 bg-gray-700 text-white text-xs font-bold px-2 py-1 rounded-full">12</span>
+            </div>
+            <div class="tab" data-tab="watched">
+                <span class="text-lg">Vistas</span>
+                <span class="ml-2 bg-gray-700 text-white text-xs font-bold px-2 py-1 rounded-full">47</span>
+            </div>
+            <div class="tab" data-tab="custom">
+                <span class="text-lg">Mis listas</span>
+            </div>
+        </div>
+
+        <!-- Watchlist Section -->
+        <div id="watchlist" class="tab-content active">
+            <div class="mb-6 flex items-center justify-between">
+                <h2 class="text-xl font-semibold">Películas por ver</h2>
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm text-gray-400">Ordenar por:</span>
+                    <select class="bg-gray-800 text-white text-sm rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-red-600">
+                        <option>Recientemente añadidas</option>
+                        <option>Orden alfabético</option>
+                        <option>Fecha de estreno</option>
+                        <option>Calificación</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Movie Item 1 -->
+              <!-- Movie Card: Spider-Man: Across the Spider-Verse -->
+<div class="movie-card bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 hover:shadow-xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div class="relative">
+        <img src="spid.jpg" alt="Spider-Man: Across the Spider-Verse" class="movie-poster w-full h-64 object-cover transition-transform duration-300 ease-in-out">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+            <button onclick="openTrailerModal('https://www.youtube.com/embed/cqGjhVJWtEg')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</div>
+    </div>
+    <div class="p-4">
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="font-semibold">Spider-Verse</h3>
+                <div class="flex items-center mt-1">
+                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                    <span>8.9</span>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="openReviewModal('Spider-Man: Across the Spider-Verse')" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button class="text-gray-400 hover:text-white bookmark-btn">
+                    <i class="far fa-bookmark"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mt-2 text-sm text-gray-400">
+            <span>Estreno: 2 Jun 2023</span>
+        </div>
+    </div>
+</div>
+
+<!-- Movie Card: Dune -->
+<div class="movie-card bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 hover:shadow-xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div class="relative">
+        <img src="dune.jpg" alt="Dune" class="movie-poster w-full h-64 object-cover transition-transform duration-300 ease-in-out">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+            <button onclick="openTrailerModal('https://www.youtube.com/embed/n9xhJrPXop4')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</div>
+    </div>
+    <div class="p-4">
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="font-semibold">Dune</h3>
+                <div class="flex items-center mt-1">
+                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                    <span>8.1</span>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="openReviewModal('Dune')" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button class="text-gray-400 hover:text-white bookmark-btn">
+                    <i class="far fa-bookmark"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mt-2 text-sm text-gray-400">
+            <span>Estreno: 22 Oct 2021</span>
+        </div>
+    </div>
+</div>
+
+
+  <!-- Movie Card: Everything Everywhere All at Once -->
+<div class="movie-card bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 hover:shadow-xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div class="relative">
+        <img src="https://image.tmdb.org/t/p/w500/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg" alt="Everything Everywhere All at Once" class="movie-poster w-full h-64 object-cover transition-transform duration-300 ease-in-out">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+            <button onclick="openTrailerModal('https://www.youtube.com/embed/wxN1T1uxQ2g')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</div>
+    </div>
+    <div class="p-4">
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="font-semibold">Everything Everywhere</h3>
+                <div class="flex items-center mt-1">
+                    <i class="fas fa-star text-yellow-400 mr-1"></i><span>8.3</span>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="openReviewModal('Everything Everywhere All at Once')" class="text-gray-400 hover:text-white"><i class="fas fa-pen"></i></button>
+                <button class="text-gray-400 hover:text-white bookmark-btn"><i class="far fa-bookmark"></i></button>
+            </div>
+        </div>
+        <div class="mt-2 text-sm text-gray-400"><span>Estreno: 25 Mar 2022</span></div>
+    </div>
+</div>
+
+<!-- Movie Card: The Batman -->
+<div class="movie-card bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 hover:shadow-xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div class="relative">
+        <img src="batman.jpg" alt="The Batman" class="movie-poster w-full h-64 object-cover transition-transform duration-300 ease-in-out">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+            <button onclick="openTrailerModal('https://www.youtube.com/embed/mqqft2x_Aa4')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</div>
+    </div>
+    <div class="p-4">
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="font-semibold">The Batman</h3>
+                <div class="flex items-center mt-1">
+                    <i class="fas fa-star text-yellow-400 mr-1"></i><span>7.7</span>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="openReviewModal('The Batman')" class="text-gray-400 hover:text-white"><i class="fas fa-pen"></i></button>
+                <button class="text-gray-400 hover:text-white bookmark-btn"><i class="far fa-bookmark"></i></button>
+            </div>
+        </div>
+        <div class="mt-2 text-sm text-gray-400"><span>Estreno: 4 Mar 2022</span></div>
+    </div>
+</div>
+
+<!-- Movie Card: Killers of the Flower Moon -->
+<div class="movie-card bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 hover:shadow-xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div class="relative">
+        <img src="killer of the.jpg" alt="Killers of the Flower Moon" class="movie-poster w-full h-64 object-cover transition-transform duration-300 ease-in-out">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+            <button onclick="openTrailerModal('https://www.youtube.com/embed/EP34Yoxs3FQ')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</div>
+    </div>
+    <div class="p-4">
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="font-semibold">Killers of the...</h3>
+                <div class="flex items-center mt-1">
+                    <i class="fas fa-star text-yellow-400 mr-1"></i><span>7.5</span>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="openReviewModal('Killers of the Flower Moon')" class="text-gray-400 hover:text-white"><i class="fas fa-pen"></i></button>
+                <button class="text-gray-400 hover:text-white bookmark-btn"><i class="far fa-bookmark"></i></button>
+            </div>
+        </div>
+        <div class="mt-2 text-sm text-gray-400"><span>Estreno: 20 Oct 2023</span></div>
+    </div>
+</div>
+
+<!-- Movie Card: Interstellar -->
+<div class="movie-card bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 hover:shadow-xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div class="relative">
+        <img src="Interstellar-366875261-large.jpg" alt="Interstellar" class="movie-poster w-full h-64 object-cover transition-transform duration-300 ease-in-out">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+            <button onclick="openTrailerModal('https://www.youtube.com/embed/zSWdZVtXT7E')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</div>
+    </div>
+    <div class="p-4">
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="font-semibold">Interstellar</h3>
+                <div class="flex items-center mt-1">
+                    <i class="fas fa-star text-yellow-400 mr-1"></i><span>8.6</span>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="openReviewModal('Interstellar')" class="text-gray-400 hover:text-white"><i class="fas fa-pen"></i></button>
+                <button class="text-gray-400 hover:text-white bookmark-btn"><i class="far fa-bookmark"></i></button>
+            </div>
+        </div>
+        <div class="mt-2 text-sm text-gray-400"><span>Estreno: 7 Nov 2014</span></div>
+    </div>
+</div>
+        <!-- Watched Section -->
+        <div id="watched" class="tab-content hidden">
+            <div class="mb-6 flex items-center justify-between">
+                <h2 class="text-xl font-semibold">Películas vistas</h2>
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm text-gray-400">Ordenar por:</span>
+                    <select class="bg-gray-800 text-white text-sm rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-red-600">
+                        <option>Recientemente vistas</option>
+                        <option>Orden alfabético</option>
+                        <option>Fecha de estreno</option>
+                        <option>Mi calificación</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Watched Movie 1 -->
+                <div class="list-item bg-gray-800 rounded-lg overflow-hidden flex transition">
+                    <div class="edit-checkbox hidden p-4 flex items-center">
+                        <input type="checkbox" class="custom-checkbox">
+                    </div>
+                    <div class="relative flex-shrink-0 w-32">
+                        <img src="oppenheimer.jpg" alt="Oppenheimer" class="movie-poster w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Oppenheimer</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>9.0</span>
+                                    <span class="mx-2">•</span>
+                                    <span>2023</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/uYPbbksJxIg')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-500 remove-btn">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="flex items-center">
+                                <span class="text-sm mr-2">Mi calificación:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-xs text-gray-500">
+                            Vista el 15/08/2023
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Watched Movie 2 -->
+                <div class="list-item bg-gray-800 rounded-lg overflow-hidden flex transition">
+                    <div class="edit-checkbox hidden p-4 flex items-center">
+                        <input type="checkbox" class="custom-checkbox">
+                    </div>
+                    <div class="relative flex-shrink-0 w-32">
+                        <img src="dune.jpg" alt="Dune" class="movie-poster w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Dune</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.0</span>
+                                    <span class="mx-2">•</span>
+                                    <span>2021</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/8g18jFHCLXk')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-500 remove-btn">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="flex items-center">
+                                <span class="text-sm mr-2">Mi calificación:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star-half-alt text-yellow-400 text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-xs text-gray-500">
+                            Vista el 02/11/2021
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Watched Movie 3 -->
+                <div class="list-item bg-gray-800 rounded-lg overflow-hidden flex transition">
+                    <div class="edit-checkbox hidden p-4 flex items-center">
+                        <input type="checkbox" class="custom-checkbox">
+                    </div>
+                    <div class="relative flex-shrink-0 w-32">
+                        <img src="killer of the.jpg" alt="Killers of the Flower Moon" class="movie-poster w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Killers of the Flower Moon</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.1</span>
+                                    <span class="mx-2">•</span>
+                                    <span>2023</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/EP34Yoxs3FQ')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-500 remove-btn">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="flex items-center">
+                                <span class="text-sm mr-2">Mi calificación:</span>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                    <i class="far fa-star text-yellow-400 text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-xs text-gray-500">
+                            Vista el 22/10/2023
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Lists Section -->
+        <div id="custom" class="tab-content hidden">
+            <div class="mb-6 flex items-center justify-between">
+                <h2 class="text-xl font-semibold">Mis listas personalizadas</h2>
+                <button id="createNewListBtn" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm">
+                    <i class="fas fa-plus mr-2"></i>Nueva lista
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Custom List 1 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition cursor-pointer" onclick="openCustomList('Favoritas de Ciencia Ficción')">
+                    <div class="relative h-40 bg-gradient-to-r from-blue-900 to-purple-900 flex items-center justify-center">
+                        <i class="fas fa-rocket text-4xl text-white opacity-50"></i>
+                        <span class="absolute bottom-4 left-4 text-white font-bold">5 películas</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Favoritas de Ciencia Ficción</h3>
+                        <p class="text-sm text-gray-400">Mis películas de ciencia ficción favoritas de todos los tiempos</p>
+                        <div class="flex mt-3">
+                            <div class="flex -space-x-2">
+                                <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-xs font-bold">JD</div>
+                                <div class="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold">MP</div>
+                                <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-xs font-bold">CR</div>
+                            </div>
+                            <span class="text-xs text-gray-500 ml-2">Compartida con 2 personas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom List 2 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition cursor-pointer" onclick="openCustomList('Clásicos del Cine')">
+                    <div class="relative h-40 bg-gradient-to-r from-amber-900 to-yellow-600 flex items-center justify-center">
+                        <i class="fas fa-film text-4xl text-white opacity-50"></i>
+                        <span class="absolute bottom-4 left-4 text-white font-bold">8 películas</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Clásicos del Cine</h3>
+                        <p class="text-sm text-gray-400">Películas clásicas que todo cinéfilo debería ver</p>
+                        <div class="flex mt-3">
+                            <div class="flex -space-x-2">
+                                <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-xs font-bold">JD</div>
+                            </div>
+                            <span class="text-xs text-gray-500 ml-2">Lista privada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom List 3 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition cursor-pointer" onclick="openCustomList('Para ver con niños')">
+                    <div class="relative h-40 bg-gradient-to-r from-green-900 to-teal-600 flex items-center justify-center">
+                        <i class="fas fa-child text-4xl text-white opacity-50"></i>
+                        <span class="absolute bottom-4 left-4 text-white font-bold">12 películas</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Para ver con niños</h3>
+                        <p class="text-sm text-gray-400">Películas familiares perfectas para disfrutar con los más pequeños</p>
+                        <div class="flex mt-3">
+                            <div class="flex -space-x-2">
+                                <div class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-xs font-bold">JD</div>
+                                <div class="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-xs font-bold">AM</div>
+                            </div>
+                            <span class="text-xs text-gray-500 ml-2">Compartida con 1 persona</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-90 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Información</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Centro de ayuda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Términos de uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacidad</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Sobre CineCritic</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Quiénes somos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Trabaja con nosotros</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Síguenos</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Descarga la app</h3>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-gray-800 text-white px-3 py-2 rounded flex items-center">
+                            <i class="fab fa-apple mr-2"></i>
+                            <span class="text-xs">Disponible en<br><span class="font-semibold">App Store</span></span>
+                        </a>
+                        <a href="#" class="bg-gray-800 text-white px-3 py-2 rounded flex items-center">
+                            <i class="fab fa-google-play mr-2"></i>
+                            <span class="text-xs">Disponible en<br><span class="font-semibold">Play Store</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2025 CineCritic. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Trailer Modal -->
+    <div id="trailerModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 modal opacity-0 invisible transition-all duration-300">
+        <div class="relative w-full max-w-4xl">
+            <button onclick="closeTrailerModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-red-500">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="aspect-w-16 aspect-h-9">
+                <iframe id="trailerVideo" class="w-full h-[500px]" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create List Modal -->
+    <div id="createListModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 modal opacity-0 invisible transition-all duration-300">
+        <div class="bg-gray-800 rounded-lg p-6 w-full max-w-md relative">
+            <button onclick="closeCreateListModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <h2 class="text-2xl font-bold mb-4">Crear nueva lista</h2>
+            <form id="createListForm">
+                <div class="mb-4">
+                    <label for="listName" class="block text-gray-300 mb-2">Nombre de la lista</label>
+                    <input type="text" id="listName" class="w-full bg-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600" required>
+                </div>
+                <div class="mb-4">
+                    <label for="listDescription" class="block text-gray-300 mb-2">Descripción (opcional)</label>
+                    <textarea id="listDescription" rows="3" class="w-full bg-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-300 mb-2">Privacidad</label>
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="privacy" value="public" class="mr-2" checked>
+                            <span>Pública</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="privacy" value="private" class="mr-2">
+                            <span>Privada</span>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded w-full">
+                    Crear lista
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom List Modal -->
+    <div id="customListModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 modal opacity-0 invisible transition-all duration-300 overflow-y-auto">
+        <div class="bg-gray-800 rounded-lg p-6 w-full max-w-4xl relative my-8">
+            <button onclick="closeCustomListModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold" id="customListTitle">Nombre de la lista</h2>
+                <div class="flex space-x-2">
+                    <button class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded text-sm">
+                        <i class="fas fa-edit mr-1"></i>Editar
+                    </button>
+                    <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">
+                        <i class="fas fa-share-alt mr-1"></i>Compartir
+                    </button>
+                </div>
+            </div>
+            <p class="text-gray-300 mb-6" id="customListDescription">Descripción de la lista</p>
+            
+            <div class="mb-6 flex items-center justify-between">
+                <h3 class="text-xl font-semibold">Películas en esta lista</h3>
+                <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">
+                    <i class="fas fa-plus mr-1"></i>Añadir películas
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- List Movie 1 -->
+                <div class="list-item bg-gray-700 rounded-lg overflow-hidden flex transition">
+                    <div class="relative flex-shrink-0 w-24">
+                        <img src="spider.jpg" alt="Spider-Man: Across the Spider-Verse" class="movie-poster w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Spider-Man: Across the Spider-Verse</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.9</span>
+                                    <span class="mx-2">•</span>
+                                    <span>2023</span>
+                                </div>
+                            </div>
+                            <button class="text-red-600 hover:text-red-500">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- List Movie 2 -->
+                <div class="list-item bg-gray-700 rounded-lg overflow-hidden flex transition">
+                    <div class="relative flex-shrink-0 w-24">
+                        <img src="interestellar.jpg" alt="Interstellar" class="movie-poster w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Interstellar</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.6</span>
+                                    <span class="mx-2">•</span>
+                                    <span>2014</span>
+                                </div>
+                            </div>
+                            <button class="text-red-600 hover:text-red-500">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- List Movie 3 -->
+                <div class="list-item bg-gray-700 rounded-lg overflow-hidden flex transition">
+                    <div class="relative flex-shrink-0 w-24">
+                        <img src="dune.jpg" alt="Dune" class="movie-poster w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Dune</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.0</span>
+                                    <span class="mx-2">•</span>
+                                    <span>2021</span>
+                                </div>
+                            </div>
+                            <button class="text-red-600 hover:text-red-500">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Highlight active nav link
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('nav a:not(.fa-user):not(.text-3xl)');
+        
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('text-red-600');
+                link.classList.remove('hover:text-gray-300');
+            } else {
+                link.classList.remove('text-red-600');
+                link.classList.add('hover:text-gray-300');
+            }
+        });
+    });
+        // Trailer Modal Functions
+        function openTrailerModal(videoUrl) {
+            const modal = document.getElementById('trailerModal');
+            const iframe = document.getElementById('trailerVideo');
+            iframe.src = videoUrl + '?autoplay=1';
+            modal.classList.remove('opacity-0', 'invisible');
+            modal.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTrailerModal() {
+            const modal = document.getElementById('trailerModal');
+            const iframe = document.getElementById('trailerVideo');
+            iframe.src = '';
+            modal.classList.remove('opacity-100', 'visible');
+            modal.classList.add('opacity-0', 'invisible');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Tab Switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Update active tab
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+                
+                // Show selected tab content
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.remove('hidden');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Edit Mode Toggle
+        document.getElementById('editBtn').addEventListener('click', function() {
+            const isEditing = this.classList.contains('editing');
+            const checkboxes = document.querySelectorAll('.edit-checkbox');
+            const removeBtns = document.querySelectorAll('.remove-btn');
+            
+            if (isEditing) {
+                this.classList.remove('editing');
+                this.innerHTML = '<i class="fas fa-edit mr-2"></i>Editar';
+                checkboxes.forEach(checkbox => checkbox.classList.add('hidden'));
+                removeBtns.forEach(btn => btn.classList.add('hidden'));
+            } else {
+                this.classList.add('editing');
+                this.innerHTML = '<i class="fas fa-check mr-2"></i>Listo';
+                checkboxes.forEach(checkbox => checkbox.classList.remove('hidden'));
+                removeBtns.forEach(btn => btn.classList.remove('hidden'));
+            }
+        });
+
+        // Remove Item
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.remove-btn')) {
+                const listItem = e.target.closest('.list-item');
+                listItem.classList.add('opacity-0', 'h-0', 'overflow-hidden', 'mb-0');
+                setTimeout(() => listItem.remove(), 300);
+            }
+        });
+
+        // Create List Modal
+        function openCreateListModal() {
+            const modal = document.getElementById('createListModal');
+            modal.classList.remove('opacity-0', 'invisible');
+            modal.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCreateListModal() {
+            const modal = document.getElementById('createListModal');
+            modal.classList.remove('opacity-100', 'visible');
+            modal.classList.add('opacity-0', 'invisible');
+            document.body.style.overflow = 'auto';
+            document.getElementById('createListForm').reset();
+        }
+
+        document.getElementById('createListBtn').addEventListener('click', openCreateListModal);
+        document.getElementById('createNewListBtn').addEventListener('click', openCreateListModal);
+
+        document.getElementById('createListForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const listName = document.getElementById('listName').value;
+            const listDescription = document.getElementById('listDescription').value;
+            const privacy = document.querySelector('input[name="privacy"]:checked').value;
+            
+            // Here you would typically send this data to a server
+            console.log({
+                name: listName,
+                description: listDescription,
+                privacy: privacy
+            });
+            
+            alert(`Lista "${listName}" creada con éxito!`);
+            closeCreateListModal();
+        });
+
+        // Custom List Modal
+        function openCustomList(listName) {
+            const modal = document.getElementById('customListModal');
+            document.getElementById('customListTitle').textContent = listName;
+            document.getElementById('customListDescription').textContent = `Descripción de la lista ${listName}`;
+            
+            modal.classList.remove('opacity-0', 'invisible');
+            modal.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCustomListModal() {
+            const modal = document.getElementById('customListModal');
+            modal.classList.remove('opacity-100', 'visible');
+            modal.classList.add('opacity-0', 'invisible');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set first tab as active by default
+            document.querySelector('.tab.active').click();
+        });
+    </script>
+</body>
+</html>

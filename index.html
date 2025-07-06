@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineCritic - Reseñas y Tráilers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-black bg-opacity-90 fixed w-full z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-8">
+            <a href="index.html" class="text-red-600 font-bold text-3xl">CineCritic</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-gray-300">Inicio</a>
+                <a href="peliculas.html" class="hover:text-gray-300">Películas</a>
+                <a href="series.html" class="hover:text-gray-300">Series</a>
+                <a href="novedades.html" class="hover:text-gray-300">Novedades</a>
+                <a href="milista.html" class="hover:text-gray-300">Mi lista</a>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <input type="text" placeholder="Buscar..." class="bg-gray-800 px-4 py-1 rounded text-sm w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-red-600">
+                <i class="fas fa-search absolute right-3 top-2 text-gray-400"></i>
+            </div>
+            <a href="login.html" class="w-8 h-8 rounded bg-red-600 flex items-center justify-center hover:bg-red-700 transition">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center pt-16">
+        <div class="absolute inset-0 bg-[url('oppenheimer.jpg')] bg-cover bg-center"></div>
+        <div class="hero-overlay absolute inset-0"></div>
+        <div class="container mx-auto px-6 relative z-10 max-w-3xl fade-in">
+            <h1 class="text-5xl font-bold mb-4">Oppenheimer</h1>
+            <div class="flex items-center mb-6 space-x-4">
+                <span class="text-green-500 font-semibold">92% relevante</span>
+                <span>2023</span>
+                <span class="border border-gray-400 px-2">R</span>
+                <span>3h 00m</span>
+            </div>
+            <p class="text-lg mb-6">El físico J. Robert Oppenheimer trabaja con un equipo de científicos durante el Proyecto Manhattan, que condujo al desarrollo de la bomba atómica.</p>
+            <div class="flex space-x-4">
+                <button onclick="openTrailerModal('https://www.youtube.com/embed/uYPbbksJxIg')" class="bg-white text-black px-6 py-2 rounded flex items-center hover:bg-opacity-80">
+                    <i class="fas fa-play mr-2"></i> Ver tráiler
+                </button>
+                <button onclick="openReviewModal('Oppenheimer')" class="bg-gray-600 bg-opacity-70 px-6 py-2 rounded flex items-center hover:bg-opacity-50">
+                    <i class="fas fa-pen mr-2"></i> Escribir reseña
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Movie Categories -->
+    <div class="container mx-auto px-6 py-12">
+        <!-- Trending Now -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Tendencias ahora</h2>
+                <div class="flex space-x-2">
+                    <button onclick="scrollCarousel('trending', 'left')" class="bg-gray-900 hover:bg-gray-700 p-2 rounded-full transition">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="scrollCarousel('trending', 'right')" class="bg-gray-900 hover:bg-gray-700 p-2 rounded-full transition">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="relative">
+                <div id="trending-carousel" class="flex space-x-4 overflow-x-auto pb-6 scrollbar-hide scroll-smooth">
+                    <!-- Movie Cards -->
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Spider-Man: Across the Spider-Verse" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/cqGjhVJWtEg')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Spider-Verse</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.9</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('Spider-Man: Across the Spider-Verse')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="batman.jpg" alt="The Batman" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/mqqft2x_Aa4')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">The Batman</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.2</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('The Batman')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="dune.jpg" alt="Dune" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/8g18jFHCLXk')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Dune</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.0</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('Dune')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="everything.jpg" alt="Everything Everywhere All at Once" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/wxN1T1uxQ2g')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Everything Everywhere</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.5</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('Everything Everywhere All at Once')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="interestellar.jpg" alt="Interstellar" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/zSWdZVtXT7E')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Interstellar</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.6</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('Interstellar')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="parasitos.jpg" alt="Parasite" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/5xH0HfJHsaY')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Parasite</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.7</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('Parasite')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="topgun.jpg" alt="Top Gun: Maverick" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/qSqVVswa420')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Top Gun: Maverick</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>8.3</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('Top Gun: Maverick')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="avatar2.jpg" alt="Avatar: The Way of Water" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/d9MyW72ELq0')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Avatar 2</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>7.8</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('Avatar: The Way of Water')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="blackp2.jpg" alt="Black Panther: Wakanda Forever" class="movie-poster w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/_Z3QKkl1WyM')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">Black Panther 2</h3>
+                                <div class="flex items-center mt-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>7.5</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="openReviewModal('Black Panther: Wakanda Forever')" class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Reviews -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Reseñas populares</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Review Cards -->
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center mr-3">
+                            <span class="font-bold">JD</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Juan Díaz</h4>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1 text-sm"></i>
+                                <span class="text-sm">4.5/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-400">Oppenheimer</h3>
+                    <p class="text-gray-300 mb-4">Una obra maestra cinematográfica que combina perfectamente el drama histórico con una narrativa visual impresionante. Nolan supera todas las expectativas.</p>
+                    <div class="flex justify-between items-center text-sm text-gray-400">
+                        <span>Hace 2 días</span>
+                        <div class="flex space-x-2">
+                            <button class="hover:text-white"><i class="far fa-thumbs-up"></i> 42</button>
+                            <button class="hover:text-white"><i class="far fa-comment"></i> 8</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                            <span class="font-bold">MP</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">María Pérez</h4>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1 text-sm"></i>
+                                <span class="text-sm">5/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-400">Spider-Man: Across the Spider-Verse</h3>
+                    <p class="text-gray-300 mb-4">Una explosión de creatividad visual y narrativa. Cada fotograma es una obra de arte. La secuela supera con creces a la primera entrega.</p>
+                    <div class="flex justify-between items-center text-sm text-gray-400">
+                        <span>Hace 1 semana</span>
+                        <div class="flex space-x-2">
+                            <button class="hover:text-white"><i class="far fa-thumbs-up"></i> 56</button>
+                            <button class="hover:text-white"><i class="far fa-comment"></i> 12</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3">
+                            <span class="font-bold">CR</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Carlos Ruiz</h4>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1 text-sm"></i>
+                                <span class="text-sm">4/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-400">The Batman</h3>
+                    <p class="text-gray-300 mb-4">Una interpretación oscura y visceral del Caballero de la Noche. Pattinson sorprende en su papel y la dirección de Reeves es impecable.</p>
+                    <div class="flex justify-between items-center text-sm text-gray-400">
+                        <span>Hace 3 semanas</span>
+                        <div class="flex space-x-2">
+                            <button class="hover:text-white"><i class="far fa-thumbs-up"></i> 34</button>
+                            <button class="hover:text-white"><i class="far fa-comment"></i> 5</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center mr-3">
+                            <span class="font-bold">AL</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Ana López</h4>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1 text-sm"></i>
+                                <span class="text-sm">4.8/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-400">Everything Everywhere All at Once</h3>
+                    <p class="text-gray-300 mb-4">Una experiencia cinematográfica única que desafía todas las convenciones. Multivereso, emociones y una actuación magistral de Michelle Yeoh.</p>
+                    <div class="flex justify-between items-center text-sm text-gray-400">
+                        <span>Hace 4 días</span>
+                        <div class="flex space-x-2">
+                            <button class="hover:text-white"><i class="far fa-thumbs-up"></i> 67</button>
+                            <button class="hover:text-white"><i class="far fa-comment"></i> 15</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center mr-3">
+                            <span class="font-bold">RG</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Ricardo García</h4>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1 text-sm"></i>
+                                <span class="text-sm">4.2/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-400">Dune</h3>
+                    <p class="text-gray-300 mb-4">Denis Villeneuve logra adaptar magistralmente la novela de Herbert. Visualmente impresionante y con un Hans Zimmer en su mejor forma.</p>
+                    <div class="flex justify-between items-center text-sm text-gray-400">
+                        <span>Hace 1 semana</span>
+                        <div class="flex space-x-2">
+                            <button class="hover:text-white"><i class="far fa-thumbs-up"></i> 48</button>
+                            <button class="hover:text-white"><i class="far fa-comment"></i> 9</button>
+                        </div>
+                    </div>
+                </div>
+
+                  <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3">
+                            <span class="font-bold">CR</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Carlos Ruiz</h4>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1 text-sm"></i>
+                                <span class="text-sm">4/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-red-400">The Batman</h3>
+                    <p class="text-gray-300 mb-4">Una interpretación oscura y visceral del Caballero de la Noche. Pattinson sorprende en su papel y la dirección de Reeves es impecable.</p>
+                    <div class="flex justify-between items-center text-sm text-gray-400">
+                        <span>Hace 3 semanas</span>
+                        <div class="flex space-x-2">
+                            <button class="hover:text-white"><i class="far fa-thumbs-up"></i> 34</button>
+                            <button class="hover:text-white"><i class="far fa-comment"></i> 5</button>
+                        </div>
+                    </div>
+                </div>
+                </section>
+<!-- Coming Soon -->
+        <section>
+            <h2 class="text-2xl font-bold mb-6">Próximamente</h2>
+            <div class="relative">
+                <div class="flex space-x-4 overflow-x-auto pb-6 scrollbar-hide">
+                    <!-- Coming Soon Cards -->
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="comoentrenar.jpg" alt="Cómo entrenar a tu dragón" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 12 Jun 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Cómo entrenar a tu dragón</h3>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="28años.webp" alt="28 años después" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 20 Jun 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">28 años después</h3>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="jurasic.jpg" alt="Jurassic World: El renacer" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 2 Jul 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Jurassic World: El renacer</h3>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="4fant.webp" alt="Los 4 Fantásticos: Primeros pasos" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 25 Jul 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Los 4 Fantásticos: Primeros pasos</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="superman.jpg" alt="Superman" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 11 Jul 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Superman</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="misionim8.jpg" alt="Mission: Impossible - Dead Reckoning Parte Dos" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 23 May 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Mission: Impossible 8</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="avatar_fire.jpg" alt="Avatar: Fire and Ash" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 19 Dic 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Avatar: Fire and Ash</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="thunderbolts.jpg" alt="Thunderbolts" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 2 May 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Thunderbolts</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="batman.jpg" alt="The Batman 2" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 2 Oct 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">The Batman 2</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="wicked.jpg" alt="Wicked: For Good" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 21 Nov 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Wicked: For Good</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="karatekid.jpg" alt="Karate Kid: Legends" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 30 May 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Karate Kid: Legends</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="minecraft.jpg" alt="A Minecraft Movie" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 4 Abr 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">A Minecraft Movie</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="lilo.jpeg" alt="Lilo & Stitch" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 23 May 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Lilo & Stitch</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="shrek5.jpg" alt="Shrek 5" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 1 Jul 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Shrek 5</h3>
+                    </div>
+
+                    <div class="flex-shrink-0 w-64">
+                        <div class="relative rounded-lg overflow-hidden mb-2">
+                            <img src="tron.jpg" alt="Tron: Ares" class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                <span class="text-white font-semibold">Estreno: 10 Oct 2025</span>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold">Tron: Ares</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-90 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Información</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Centro de ayuda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Términos de uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacidad</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Sobre CineCritic</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Quiénes somos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Trabaja con nosotros</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Síguenos</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Descarga la app</h3>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-gray-800 text-white px-3 py-2 rounded flex items-center">
+                            <i class="fab fa-apple mr-2"></i>
+                            <span class="text-xs">Disponible en<br><span class="font-semibold">App Store</span></span>
+                        </a>
+                        <a href="#" class="bg-gray-800 text-white px-3 py-2 rounded flex items-center">
+                            <i class="fab fa-google-play mr-2"></i>
+                            <span class="text-xs">Disponible en<br><span class="font-semibold">Play Store</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2025 CineCritic. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Trailer Modal -->
+    <div id="trailerModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 modal opacity-0 invisible transition-all duration-300">
+        <div class="relative w-full max-w-4xl">
+            <button onclick="closeTrailerModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-red-500">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="aspect-w-16 aspect-h-9">
+                <iframe id="trailerVideo" class="w-full h-[500px]" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 modal opacity-0 invisible transition-all duration-300">
+        <div class="bg-gray-800 rounded-lg p-6 w-full max-w-2xl relative">
+            <button onclick="closeReviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <h2 class="text-2xl font-bold mb-4" id="reviewMovieTitle">Escribir reseña</h2>
+            <form id="reviewForm" onsubmit="submitReview(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-300 mb-2">Calificación</label>
+                    <div class="star-rating flex justify-center">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label for="star5" title="5 estrellas"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label for="star4" title="4 estrellas"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label for="star3" title="3 estrellas"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label for="star2" title="2 estrellas"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label for="star1" title="1 estrella"><i class="fas fa-star"></i></label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="reviewTitle" class="block text-gray-300 mb-2">Título de tu reseña</label>
+                    <input type="text" id="reviewTitle" class="w-full bg-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600" required>
+                </div>
+                <div class="mb-6">
+                    <label for="reviewContent" class="block text-gray-300 mb-2">Reseña</label>
+                    <textarea id="reviewContent" rows="5" class="w-full bg-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600" required></textarea>
+                </div>
+                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded w-full">
+                    Publicar reseña
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Highlight active nav link
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('nav a:not(.fa-user):not(.text-3xl)');
+        
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('text-red-600');
+                link.classList.remove('hover:text-gray-300');
+            } else {
+                link.classList.remove('text-red-600');
+                link.classList.add('hover:text-gray-300');
+            }
+        });
+    });
+        // Trailer Modal Functions
+        function openTrailerModal(videoUrl) {
+            const modal = document.getElementById('trailerModal');
+            const iframe = document.getElementById('trailerVideo');
+            iframe.src = videoUrl + '?autoplay=1';
+            modal.classList.remove('opacity-0', 'invisible');
+            modal.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTrailerModal() {
+            const modal = document.getElementById('trailerModal');
+            const iframe = document.getElementById('trailerVideo');
+            iframe.src = '';
+            modal.classList.remove('opacity-100', 'visible');
+            modal.classList.add('opacity-0', 'invisible');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Review Modal Functions
+        function openReviewModal(movieTitle) {
+            const modal = document.getElementById('reviewModal');
+            const titleElement = document.getElementById('reviewMovieTitle');
+            titleElement.textContent = `Reseña de ${movieTitle}`;
+            modal.classList.remove('opacity-0', 'invisible');
+            modal.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReviewModal() {
+            const modal = document.getElementById('reviewModal');
+            modal.classList.remove('opacity-100', 'visible');
+            modal.classList.add('opacity-0', 'invisible');
+            document.body.style.overflow = 'auto';
+            document.getElementById('reviewForm').reset();
+        }
+
+        // Submit Review Function
+        function submitReview(event) {
+            event.preventDefault();
+            
+            const movieTitle = document.getElementById('reviewMovieTitle').textContent.replace('Reseña de ', '');
+            const rating = document.querySelector('input[name="rating"]:checked').value;
+            const title = document.getElementById('reviewTitle').value;
+            const content = document.getElementById('reviewContent').value;
+            
+            // Here you would typically send this data to a server
+            // For this example, we'll just log it and show an alert
+            console.log({
+                movie: movieTitle,
+                rating: rating,
+                title: title,
+                content: content
+            });
+            
+            alert('¡Reseña enviada con éxito! Gracias por tu contribución.');
+            closeReviewModal();
+        }
+
+        // Bookmark and Like functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Bookmark buttons
+            const bookmarkButtons = document.querySelectorAll('.fa-bookmark');
+            bookmarkButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.classList.contains('far')) {
+                        this.classList.remove('far');
+                        this.classList.add('fas', 'text-red-600');
+                    } else {
+                        this.classList.remove('fas', 'text-red-600');
+                        this.classList.add('far');
+                    }
+                });
+            });
+            
+            // Like buttons
+            const likeButtons = document.querySelectorAll('.fa-thumbs-up');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.classList.contains('far')) {
+                        this.classList.remove('far');
+                        this.classList.add('fas', 'text-blue-400');
+                    } else {
+                        this.classList.remove('fas', 'text-blue-400');
+                        this.classList.add('far');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

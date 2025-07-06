@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Películas - CineCritic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .filter-dropdown {
+            display: none;
+        }
+        .filter-dropdown.open {
+            display: block;
+        }
+        .nav-link.active {
+            color: #dc2626;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-black bg-opacity-90 fixed w-full z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-8">
+            <a href="index.html" class="text-red-600 font-bold text-3xl">CineCritic</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-gray-300 nav-link">Inicio</a>
+                <a href="peliculas.html" class="hover:text-gray-300 nav-link">Películas</a>
+                <a href="series.html" class="hover:text-gray-300 nav-link">Series</a>
+                <a href="novedades.html" class="hover:text-gray-300 nav-link">Novedades</a>
+                <a href="milista.html" class="hover:text-gray-300 nav-link">Mi lista</a>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <input type="text" placeholder="Buscar..." class="bg-gray-800 px-4 py-1 rounded text-sm w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-red-600">
+                <i class="fas fa-search absolute right-3 top-2 text-gray-400"></i>
+            </div>
+            <a href="login.html" class="w-8 h-8 rounded bg-red-600 flex items-center justify-center hover:bg-red-700 transition">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 pt-32 pb-12">
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">Explora Películas</h1>
+                <p class="text-gray-400">Descubre las mejores películas de todos los géneros y épocas</p>
+            </div>
+            
+            <!-- Filters -->
+            <div class="mt-4 md:mt-0">
+                <div class="relative inline-block text-left">
+                    <button onclick="toggleFilterDropdown()" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded flex items-center space-x-2">
+                        <i class="fas fa-filter"></i>
+                        <span>Filtros</span>
+                    </button>
+                    
+                    <div id="filterDropdown" class="filter-dropdown absolute right-0 mt-2 w-64 bg-gray-800 rounded shadow-lg z-10">
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-3">Géneros</h3>
+                            <div class="grid grid-cols-2 gap-2 mb-4">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Acción
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Aventura
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Comedia
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Drama
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Terror
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Ciencia ficción
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Romance
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Animación
+                                </label>
+                            </div>
+                            
+                            <h3 class="font-semibold mb-3">Año</h3>
+                            <div class="mb-4">
+                                <select class="w-full bg-gray-700 rounded px-3 py-1">
+                                    <option>Todos los años</option>
+                                    <option>2020s</option>
+                                    <option>2010s</option>
+                                    <option>2000s</option>
+                                    <option>1990s</option>
+                                    <option>1980s</option>
+                                </select>
+                            </div>
+                            
+                            <h3 class="font-semibold mb-3">Calificación</h3>
+                            <div class="flex items-center mb-4">
+                                <div class="rating-stars flex mr-2">
+                                    <i class="fas fa-star active"></i>
+                                    <i class="fas fa-star active"></i>
+                                    <i class="fas fa-star active"></i>
+                                    <i class="fas fa-star active"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>+4 estrellas</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <button class="text-gray-400 hover:text-white">Limpiar</button>
+                                <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded">Aplicar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Featured Movies -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Películas destacadas</h2>
+                <a href="#" class="text-gray-400 hover:text-white text-sm">Ver todas</a>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <!-- Movie Card 1 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Spider-Man: Across the Spider-Verse" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/cqGjhVJWtEg')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-black bg-opacity-70 rounded-full w-8 h-8 flex items-center justify-center">
+                            <i class="fas fa-bookmark text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">Spider-Man: Across the Spider-Verse</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star-half-alt active"></i>
+                            </div>
+                            <span>4.7</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400 mt-1">
+                            <span>2023</span>
+                            <span>2h 20m</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 2 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="batman.jpg" alt="The Batman" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/mqqft2x_Aa4')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-black bg-opacity-70 rounded-full w-8 h-8 flex items-center justify-center">
+                            <i class="fas fa-bookmark text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">The Batman</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span>4.1</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400 mt-1">
+                            <span>2022</span>
+                            <span>2h 56m</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 3 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="dune.jpg" alt="Dune" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/8g18jFHCLXk')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-black bg-opacity-70 rounded-full w-8 h-8 flex items-center justify-center">
+                            <i class="fas fa-bookmark text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">Dune</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span>4.0</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400 mt-1">
+                            <span>2021</span>
+                            <span>2h 35m</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 4 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="everything.jpg" alt="Everything Everywhere All at Once" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/wxN1T1uxQ2g')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-black bg-opacity-70 rounded-full w-8 h-8 flex items-center justify-center">
+                            <i class="fas fa-bookmark text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">Everything Everywhere All at Once</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star-half-alt active"></i>
+                            </div>
+                            <span>4.3</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400 mt-1">
+                            <span>2022</span>
+                            <span>2h 19m</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 5 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="interestellar.jpg" alt="Interstellar" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/zSWdZVtXT7E')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-black bg-opacity-70 rounded-full w-8 h-8 flex items-center justify-center">
+                            <i class="fas fa-bookmark text-gray-300"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">Interstellar</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star-half-alt active"></i>
+                            </div>
+                            <span>4.6</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400 mt-1">
+                            <span>2014</span>
+                            <span>2h 49m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Movie Categories -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Películas de acción</h2>
+                <a href="#" class="text-gray-400 hover:text-white text-sm">Ver todas</a>
+            </div>
+            
+            <div class="relative">
+                <div class="flex space-x-4 overflow-x-auto pb-6 scrollbar-hide">
+                    <!-- Action Movie 1 -->
+                    <div class="flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-3">
+                            <img src="jhon.jpg" alt="John Wick 4" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/qEVUtrk8_B4')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold truncate">John Wick 4</h3>
+                    </div>
+                    
+                    <!-- Action Movie 2 -->
+                    <div class="flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-3">
+                            <img src="topgun.jpg" alt="Top Gun: Maverick" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/giXco2jaZ_4')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold truncate">Top Gun: Maverick</h3>
+                    </div>
+                    
+                    <!-- Action Movie 3 -->
+                    <div class="flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-3">
+                            <img src="misionim.webp" alt="Mission: Impossible" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/avz06PDqDbM')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold truncate">Mission: Impossible</h3>
+                    </div>
+                    
+                    <!-- Action Movie 4 -->
+                    <div class="flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-3">
+                            <img src="matrix.jpg" alt="The Matrix" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/vKQi3bBA1y8')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold truncate">The Matrix</h3>
+                    </div>
+                    
+                    <!-- Action Movie 5 -->
+                    <div class="flex-shrink-0 w-48">
+                        <div class="relative rounded-lg overflow-hidden mb-3">
+                            <img src="madmax.jpg" alt="Mad Max: Fury Road" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <button onclick="openTrailerModal('https://www.youtube.com/embed/hEJnMQG9ev8')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="font-semibold truncate">Mad Max: Fury Road</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Classic Movies -->
+        <section>
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Clásicos del cine</h2>
+                <a href="#" class="text-gray-400 hover:text-white text-sm">Ver todas</a>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <!-- Classic Movie 1 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="padrino.jpg" alt="The Godfather" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/sY1S34973zA')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">The Godfather</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                            </div>
+                            <span>4.9</span>
+                        </div>
+                        <div class="text-sm text-gray-400 mt-1">1972</div>
+                    </div>
+                </div>
+                
+                <!-- Classic Movie 2 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="pulp.jpg" alt="Pulp Fiction" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/s7EdQ4FqbhY')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">Pulp Fiction</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star-half-alt active"></i>
+                            </div>
+                            <span>4.7</span>
+                        </div>
+                        <div class="text-sm text-gray-400 mt-1">1994</div>
+                    </div>
+                </div>
+                
+                <!-- Classic Movie 3 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="casab.jpg" alt="Casablanca" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/BkL9l7qovsE')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">Casablanca</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                            </div>
+                            <span>4.9</span>
+                        </div>
+                        <div class="text-sm text-gray-400 mt-1">1942</div>
+                    </div>
+                </div>
+                
+                <!-- Classic Movie 4 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="loquelviento.jpg" alt="Gone with the Wind" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/8mM6iG0DPrk')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">Gone with the Wind</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star-half-alt active"></i>
+                            </div>
+                            <span>4.3</span>
+                        </div>
+                        <div class="text-sm text-gray-400 mt-1">1939</div>
+                    </div>
+                </div>
+                
+                <!-- Classic Movie 5 -->
+                <div class="movie-card group">
+                    <div class="relative rounded-lg overflow-hidden mb-3">
+                        <img src="psycho.jpg" alt="Psycho" class="movie-poster w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button onclick="openTrailerModal('https://www.youtube.com/embed/0WtDmbr9xyY')" class="bg-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold truncate">Psycho</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars flex mr-2">
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                                <i class="fas fa-star active"></i>
+                            </div>
+                            <span>4.9</span>
+                        </div>
+                        <div class="text-sm text-gray-400 mt-1">1960</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-90 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Información</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Centro de ayuda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Términos de uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacidad</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Sobre CineCritic</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Quiénes somos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Trabaja con nosotros</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Síguenos</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 font-semibold mb-4">Descarga la app</h3>
+                    <div class="flex space-x-2">
+                        <a href="#" class="bg-gray-800 text-white px-3 py-2 rounded flex items-center">
+                            <i class="fab fa-apple mr-2"></i>
+                            <span class="text-xs">Disponible en<br><span class="font-semibold">App Store</span></span>
+                        </a>
+                        <a href="#" class="bg-gray-800 text-white px-3 py-2 rounded flex items-center">
+                            <i class="fab fa-google-play mr-2"></i>
+                            <span class="text-xs">Disponible en<br><span class="font-semibold">Play Store</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2025 CineCritic. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Trailer Modal -->
+    <div id="trailerModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300">
+        <div class="relative w-full max-w-4xl">
+            <button onclick="closeTrailerModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-red-500">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="aspect-w-16 aspect-h-9">
+                <iframe id="trailerVideo" class="w-full h-[500px]" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Highlight active nav link
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('nav a:not(.fa-user):not(.text-3xl)');
+        
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('text-red-600');
+                link.classList.remove('hover:text-gray-300');
+            } else {
+                link.classList.remove('text-red-600');
+                link.classList.add('hover:text-gray-300');
+            }
+        });
+    });
+
+        // Toggle filter dropdown
+        function toggleFilterDropdown() {
+            const dropdown = document.getElementById('filterDropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('filterDropdown');
+            const filterButton = document.querySelector('[onclick="toggleFilterDropdown()"]');
+            
+            if (!filterButton.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+
+        // Trailer Modal Functions
+        function openTrailerModal(videoUrl) {
+            const modal = document.getElementById('trailerModal');
+            const iframe = document.getElementById('trailerVideo');
+            iframe.src = videoUrl + '?autoplay=1';
+            modal.classList.remove('opacity-0', 'invisible');
+            modal.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+            
+            // Close filter dropdown if open
+            document.getElementById('filterDropdown').classList.remove('open');
+        }
+
+        function closeTrailerModal() {
+            const modal = document.getElementById('trailerModal');
+            const iframe = document.getElementById('trailerVideo');
+            iframe.src = '';
+            modal.classList.remove('opacity-100', 'visible');
+            modal.classList.add('opacity-0', 'invisible');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Bookmark functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookmarkIcons = document.querySelectorAll('.fa-bookmark');
+            
+            bookmarkIcons.forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (this.classList.contains('far')) {
+                        this.classList.remove('far');
+                        this.classList.add('fas', 'text-red-600');
+                    } else {
+                        this.classList.remove('fas', 'text-red-600');
+                        this.classList.add('far');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
