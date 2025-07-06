@@ -9,28 +9,45 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
-    <!-- Navbar -->
-    <nav class="bg-black bg-opacity-90 fixed w-full z-50 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center space-x-8">
-            <a href="index.html" class="text-red-600 font-bold text-3xl">CineCritic</a>
-            <div class="hidden md:flex space-x-6">
-                <a href="index.html" class="hover:text-gray-300">Inicio</a>
-                <a href="peliculas.html" class="hover:text-gray-300">Películas</a>
-                <a href="series.html" class="hover:text-gray-300">Series</a>
-                <a href="novedades.html" class="hover:text-gray-300">Novedades</a>
-                <a href="milista.html" class="hover:text-gray-300">Mi lista</a>
-            </div>
+<!-- Navbar -->
+<nav class="bg-black bg-opacity-90 fixed w-full z-50 px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-8">
+        <a href="index.html" class="text-red-600 font-bold text-3xl">CineCritic</a>
+
+        <!-- Menú Desktop -->
+        <div class="hidden md:flex space-x-6" id="desktop-menu">
+            <a href="index.html" class="hover:text-gray-300">Inicio</a>
+            <a href="peliculas.html" class="hover:text-gray-300">Películas</a>
+            <a href="series.html" class="hover:text-gray-300">Series</a>
+            <a href="novedades.html" class="hover:text-gray-300">Novedades</a>
+            <a href="milista.html" class="hover:text-gray-300">Mi lista</a>
         </div>
-        <div class="flex items-center space-x-4">
-            <div class="relative">
-                <input type="text" placeholder="Buscar..." class="bg-gray-800 px-4 py-1 rounded text-sm w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-red-600">
-                <i class="fas fa-search absolute right-3 top-2 text-gray-400"></i>
-            </div>
-            <a href="login.html" class="w-8 h-8 rounded bg-red-600 flex items-center justify-center hover:bg-red-700 transition">
-                <i class="fas fa-user"></i>
-            </a>
+
+        <!-- Botón Hamburguesa (visible solo en móvil) -->
+        <button id="hamburger" class="md:hidden text-white text-2xl focus:outline-none">
+            ☰
+        </button>
+    </div>
+
+    <div class="flex items-center space-x-4">
+        <div class="relative">
+            <input type="text" placeholder="Buscar..." class="bg-gray-800 px-4 py-1 rounded text-sm w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-red-600">
+            <i class="fas fa-search absolute right-3 top-2 text-gray-400"></i>
         </div>
-    </nav>
+        <a href="login.html" class="w-8 h-8 rounded bg-red-600 flex items-center justify-center hover:bg-red-700 transition">
+            <i class="fas fa-user"></i>
+        </a>
+    </div>
+
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="fixed top-16 left-0 right-0 bg-black bg-opacity-95 hidden flex-col space-y-4 p-6 z-40">
+        <a href="index.html" class="block hover:text-gray-300">Inicio</a>
+        <a href="peliculas.html" class="block hover:text-gray-300">Películas</a>
+        <a href="series.html" class="block hover:text-gray-300">Series</a>
+        <a href="novedades.html" class="block hover:text-gray-300">Novedades</a>
+        <a href="milista.html" class="block hover:text-gray-300">Mi lista</a>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center pt-16">
@@ -737,7 +754,46 @@
             </form>
         </div>
     </div>
+   <!-- Script para el menú hamburguesa -->
+     <script>
+     // Mostrar/Ocultar menú móvil
+     const hamburger = document.getElementById('hamburger');
+     const mobileMenu = document.getElementById('mobile-menu');
 
+     if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Ocultar menú al hacer scroll o seleccionar una opción
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    }
+
+     // Highlight active nav link
+     document.addEventListener('DOMContentLoaded', function () {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('nav a:not(.fa-user):not(.text-3xl)');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('text-red-600');
+                link.classList.remove('hover:text-gray-300');
+            } else {
+                link.classList.remove('text-red-600');
+                link.classList.add('hover:text-gray-300');
+            }
+        });
+     });
+    </script>
     <script>
         // Highlight active nav link
     document.addEventListener('DOMContentLoaded', function() {
